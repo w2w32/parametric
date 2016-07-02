@@ -585,9 +585,9 @@ text-align:center;
 <td>tmin</td><td>tmax</td><td>tstep</td>
 </tr>
 <tr>
-<td><input type="text" id="min" value="0"></td>
-<td><input type="text" id="max" value="2*pi"></td>
-<td><input type="text" id="step" value="pi/1215"></td>
+<td><input type="text" id="min" value="0" onkeydown="nopreset()"></td>
+<td><input type="text" id="max" value="2*pi" onkeydown="nopreset()"></td>
+<td><input type="text" id="step" value="pi/1215" onkeydown="nopreset()"></td>
 </tr>
 </table>
 <div> Enable Axes: <input type="checkbox" id="axescheck" onmouseup="checkdelay(updateaxes)"></div><br>

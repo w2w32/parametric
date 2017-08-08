@@ -238,7 +238,7 @@ function init(){//when the page loads, set variables for the canvases, listen fo
 	function newPreset(){
 	presetarray.push(new preset(document.getElementById("input1").value,document.getElementById("input2"),document.getElementById("input3").value,
 	document.getElementById("input4").value,document.getElementById("input5").value,document.getElementById("min").value,document.getElementById("max").value,
-	document.getElementById("step").value))
+	document.getElementById("step").value))}
 	/*		document.getElementById("input1").value=presetarray[choice].x;
 			document.getElementById("input2").value=presetarray[choice].y;
 			document.getElementById("input3").value=presetarray[choice].h;
@@ -256,6 +256,7 @@ function init(){//when the page loads, set variables for the canvases, listen fo
     MY=3;
     draw();
 }
+
 function CLEAR(){//clear the canvas
 	ctx1.clearRect(0,0,can1.width,can1.height);
 }
@@ -606,6 +607,5 @@ Change point <input type="number" id="changepoint"></input><br>
 <div id="resetpoints" onclick="bezreset()">Reset Control Points</div>
 </div>
 </div>
-
 </body>
 </html>

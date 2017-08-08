@@ -6,7 +6,8 @@
 var tmin,tmax,tstep,t;
 var scale;
 var input1,input2;
-var PI=Math.PI;
+var pi=Math.PI;
+var e=Math.E;
 var centerX,centerY;
 
 var lockX=false;
@@ -31,7 +32,7 @@ var opacity=1;/* opacity of clear layer
 
 var xArray=[];
 var yArray=[];
-var MX,MY;
+var mx,my;
 var equationcount;
 
 var finalstrings1=[];
@@ -89,17 +90,17 @@ function update(){//sets variables to the values entered in inputs
 	scale=document.getElementById("zoom").valueAsNumber;
 	centerX=scale*document.getElementById("centx").valueAsNumber;
 	centerY=scale*document.getElementById("centy").valueAsNumber;
-	tmin=eval(tmin.toUpperCase());
-	tmax=eval(tmax.toUpperCase());
-	tstep=eval(tstep.toUpperCase());
+	tmin=eval(tmin);
+	tmax=eval(tmax);
+	tstep=eval(tstep);
 }
 function mouseCoord(e){//gets and displays mouse coordinates, and redraws the graph with every movement
 	if(!lockX){
-	MX=(e.offsetX-(can1.width/2-centerX))/(scale)}
+	mx=(e.offsetX-(can1.width/2-centerX))/(scale)}
 	if(!lockY){
-	MY=(e.offsetY-(can1.height/2-centerY))/(0-scale)}
-	document.getElementById("xdisplay").innerHTML=(MX);
-	document.getElementById("ydisplay").innerHTML=(MY);
+	my=(e.offsetY-(can1.height/2-centerY))/(0-scale)}
+	document.getElementById("xdisplay").innerHTML=(mx);
+	document.getElementById("ydisplay").innerHTML=(my);
 	if(animate){
 		draw();
 	}
@@ -239,21 +240,8 @@ function init(){//when the page loads, set variables for the canvases, listen fo
 	presetarray.push(new preset(document.getElementById("input1").value,document.getElementById("input2"),document.getElementById("input3").value,
 	document.getElementById("input4").value,document.getElementById("input5").value,document.getElementById("min").value,document.getElementById("max").value,
 	document.getElementById("step").value))}
-	/*		document.getElementById("input1").value=presetarray[choice].x;
-			document.getElementById("input2").value=presetarray[choice].y;
-			document.getElementById("input3").value=presetarray[choice].h;
-			document.getElementById("input4").value=presetarray[choice].s;
-			document.getElementById("input5").value=presetarray[choice].l;
-			document.getElementById("min").value=presetarray[choice].tmin;
-			document.getElementById("max").value=presetarray[choice].tmax;
-			document.getElementById("step").value=presetarray[choice].tstep;
-	
-	}
-	if(navigator.userAgent.indexOf("Chrome")===-1&&navigator.userAgent.indexOf("Safari")===-1){
-    	alert("This program works best on Safari or Chrome.")
-    }*/
-    MX=6;
-    MY=3;
+    mx=6;
+	my=3;
     draw();
 }
 
@@ -357,27 +345,26 @@ function parse(){
 	(instead of making proxy functions like "function sin(x){return Math.sin(x)}")
 	would improve performance. it does, but not noticeably*/
 		var a=string;
-		a=replaceall(a,"ASIN","Math.asin");
-		a=replaceall(a,"ACOS","Math.acos");
-		a=replaceall(a,"ATAN","Math.atan");
-		a=replaceall(a,"SIN","Math.sin");
-		a=replaceall(a,"COS","Math.cos");
-		a=replaceall(a,"TAN","Math.tan");
-		a=replaceall(a,"POW","Math.pow");
-		a=replaceall(a,"SQRT","Math.sqrt");
-		a=replaceall(a,"EXP","Math.exp");
-		a=replaceall(a,"LN","Math.log");
-		a=replaceall(a,"FLOOR","Math.floor");
-		a=replaceall(a,"CEIL","Math.ceil");
-		a=replaceall(a,"T","t");
-		return a;}
-		
-	//turn them all to uppercase so the replace function doesn't get stuck in a loop
-	input1=fullreplace(document.getElementById("input1").value.toUpperCase());
-	input2=fullreplace(document.getElementById("input2").value.toUpperCase());
-	input3=fullreplace(document.getElementById("input3").value.toUpperCase());
-	input4=fullreplace(document.getElementById("input4").value.toUpperCase());
-	input5=fullreplace(document.getElementById("input5").value.toUpperCase());
+		a = a.replace(/asin/g, "Math.asin");
+		a = a.replace(/acos/g, "Math.acos");
+		a = a.replace(/atan/g, "Math.atan");
+		a = a.replace(/sin/g, "Math.sin");
+		a = a.replace(/cos/g, "Math.cos");
+		a = a.replace(/tan/g, "Math.tan");
+		a = a.replace(/pow/g, "Math.pow");
+		a = a.replace(/sqrt/g, "Math.sqrt");
+		a = a.replace(/exp/g, "Math.exp");
+		a = a.replace(/ln/g, "Math.log");
+		a = a.replace(/abs/g, "Math.abs");
+		a = a.replace(/floor/g, "Math.floor");
+		a = a.replace(/ceil/g, "Math.ceil");
+		return a;
+		}
+	input1=fullreplace(document.getElementById("input1").value);
+	input2=fullreplace(document.getElementById("input2").value);
+	input3=fullreplace(document.getElementById("input3").value);
+	input4=fullreplace(document.getElementById("input4").value);
+	input5=fullreplace(document.getElementById("input5").value);
 	
 	//create arrays of multiple equations
 	finalstrings1=input1.split(" ");
@@ -392,7 +379,6 @@ function parse(){
 	finalstrings3=finalize(finalstrings3);
 	finalstrings4=finalize(finalstrings4);
 	finalstrings5=finalize(finalstrings5);
-
 }
 function replaceall(string,o,n){//replace all instances of a substring with another substring
 	if(n.indexOf(o)==-1){
@@ -607,5 +593,6 @@ Change point <input type="number" id="changepoint"></input><br>
 <div id="resetpoints" onclick="bezreset()">Reset Control Points</div>
 </div>
 </div>
+
 </body>
 </html>

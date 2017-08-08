@@ -108,9 +108,6 @@ function mouseClear(){//clears the mouse coordinate displays
 	document.getElementById("xdisplay").innerHTML="";
 	document.getElementById("ydisplay").innerHTML="";
 }
-function checkdelay(a){//there is a short delay between when a checkbox is clicked and when its value actually changes 
-	setTimeout(a,2);
-}
 function updateaxes(){//draws axes based on center coordinates
 	if(document.getElementById("axescheck").checked){
 		ctx0.clearRect(0,0,can1.width,can1.height);
@@ -156,8 +153,6 @@ function updatebezier(){//toggle bezier mode; polar mode and bezier mode cannot 
 		bez=false;
 		document.getElementById("bezmenu").style.display="none";
 		document.getElementById("preset").disabled=true;
-		//document.getElementById("input1").value="";
-		//document.getElementById("input2").value="";
 		xArray=[];
 		yArray=[];
 		document.getElementById("polarcheck").disabled=false;
@@ -252,11 +247,11 @@ function init(){//when the page loads, set variables for the canvases, listen fo
 			document.getElementById("min").value=presetarray[choice].tmin;
 			document.getElementById("max").value=presetarray[choice].tmax;
 			document.getElementById("step").value=presetarray[choice].tstep;
-	*/
+	
 	}
 	if(navigator.userAgent.indexOf("Chrome")===-1&&navigator.userAgent.indexOf("Safari")===-1){
-    	alert("This program works best on Safari or Chrome.");
-    }
+    	alert("This program works best on Safari or Chrome.")
+    }*/
     MX=6;
     MY=3;
     draw();
@@ -589,7 +584,7 @@ text-align:center;
 <td><input type="text" id="step" value="pi/1215" onkeydown="nopreset()"></td>
 </tr>
 </table>
-<div> Enable Axes: <input type="checkbox" id="axescheck" onmouseup="checkdelay(updateaxes)"></div><br>
+<div> Enable Axes: <input type="checkbox" id="axescheck" onchange="updateaxes()"></div><br>
 <div id="right">
 <h3>Parametric Grapher</h3>
 <div>Scale: <input class="view" id="zoom" type="number" value="10"/></div><sup class="description">Pixels per graph unit</sup>
@@ -600,9 +595,9 @@ text-align:center;
 <select id="preset">
 <option>None</option>
 </select><br><br>
-<div class="mode">S/L inputs: <input type="checkbox" id="SLcheck" onmouseup="checkdelay(updateSL)"></div><sup class="description">Equations for saturation and lightness</sup>
-<div class="mode">Polar Graph: <input type="checkbox" id="polarcheck" onmouseup="checkdelay(updatepolar)"></div><sup class="description">R and &theta; instead of X and Y</sup>
-<div class="mode">Bezier Mode: <input type="checkbox" id="beziercheck" onmouseup="checkdelay(updatebezier)"></div><sup class="description">Click on graph to set or change control points</sup>
+<div class="mode">S/L inputs: <input type="checkbox" id="SLcheck" onchange="updateSL()"></div><sup class="description">Equations for saturation and lightness</sup>
+<div class="mode">Polar Graph: <input type="checkbox" id="polarcheck" onchange="updatepolar()"></div><sup class="description">R and &theta; instead of X and Y</sup>
+<div class="mode">Bezier Mode: <input type="checkbox" id="beziercheck" onchange="updatebezier()"></div><sup class="description">Click on graph to set or change control points</sup>
 <div id="bezmenu">
 Number of points: <span id="numberofpoints">0</span><br><br>
 Line between control points <input type="checkbox" id="bezline"><br>

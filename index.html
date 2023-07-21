@@ -398,11 +398,11 @@ function canvasclick(){//adds a new bezier point
 	if(bez){
 		var change=document.getElementById("changepoint").valueAsNumber;
 		if(isNaN(change)){
-			xArray.push(MX);
-			yArray.push(MY);
+			xArray.push(mx);
+			yArray.push(my);
 		}else if(change>0&&change<=xArray.length&&change%1===0){
-			xArray[change-1]=MX;
-			yArray[change-1]=MY;
+			xArray[change-1]=mx;
+			yArray[change-1]=my;
 		}
 		var degree=xArray.length-1;
 		var xFunction="0"
